@@ -1,6 +1,8 @@
 <html>
 
 <head>
+    <meta charset="utf-8">
+    <title>웹게임</title>
 </head>
 
 <body>
@@ -12,25 +14,23 @@
     <script>
         'use strict';
 
-        const e = React.createElement;
-
         class LikeButton extends React.Component {
             constructor(props) {
-                super(props);
-                this.state = { liked: false };
+                super(props)
+                this.state = { liked: false }
             }
-
             render() {
                 if (this.state.liked) {
-                    return 'You liked this.';
+                    return 'You liked this.'
                 }
 
-                return e('button', { onClick: () => this.setState({ liked: true }) }, 'Like');
+                return React.createElement('button', { onClick: () => this.setState({ liked: true }) }, 'Like')
             }
+
         }
     </script>
     <script>
-        ReactDOM.createRoot(document.querySelector('#root')).render(e(LikeButton));
+        ReactDOM.render(React.createElement(LikeButton), document.querySelector('#root'))
     </script>
 </body>
 
