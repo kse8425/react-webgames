@@ -1,0 +1,71 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>구구단</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel">
+        'use strict';
+        class GuGuDan extends React.Component {
+            constructor(props) {
+                super(props)
+                this.state = {
+                    first: Math.ceil(Math.random() * 9),
+                    second: Math.ceil(Math.random() * 9),
+                    value: '',
+                    result: '',
+                }
+            }
+            printOK = () => `${this.state.first} * ${this.state.second} = ${this.state.first * this.state.second}`
+            onSubmit = (e) => {
+                e.preventDefault()
+                if (parseInt(this.state.value) === this.state.first * this.state.second) {
+                    this.setState({
+                        result: this.printOK() + ' 딩동댕',
+                        first: Math.ceil(Math.random() * 9),
+                        second: Math.ceil(Math.random() * 9),
+                        value: '',
+                    })
+                }
+                else {
+                    this.setState({ result: '떙', value: '', })
+                }
+
+            }
+
+            onChange = (e) => this.setState({ value: e.target.value })
+
+            render() {
+                return (
+                    <div>
+                        {this.state.first} 곱하기 {this.state.second} = ?
+                        <form onSubmit={this.onSubmit}>
+                            <input type="number" value={this.state.value} onChange={this.onChange} />
+                            <button>입력!</button>
+                        </form>
+                        <div>{this.state.result}</div>
+                    </div>
+                )
+
+            }
+        }
+    </script>
+    <script type="text/babel">
+        // ReactDOM.render(<LikeButton />, document.querySelector('#root'))
+        ReactDOM.createRoot(document.querySelector('#root')).render(
+            <div>
+                <GuGuDan />
+                <GuGuDan />
+                <GuGuDan />
+            </div>
+        )
+    </script>
+</body>
+
+</html>
