@@ -43,14 +43,14 @@
 
             render() {
                 return (
-                    <div>
+                    <React.Fragment>
                         {this.state.first} 곱하기 {this.state.second} = ?
                         <form onSubmit={this.onSubmit}>
                             <input type="number" value={this.state.value} onChange={this.onChange} />
                             <button>입력!</button>
                         </form>
                         <div>{this.state.result}</div>
-                    </div>
+                    </React.Fragment>
                 )
 
             }
@@ -60,8 +60,6 @@
         // ReactDOM.render(<LikeButton />, document.querySelector('#root'))
         ReactDOM.createRoot(document.querySelector('#root')).render(
             <div>
-                <GuGuDan />
-                <GuGuDan />
                 <GuGuDan />
             </div>
         )
