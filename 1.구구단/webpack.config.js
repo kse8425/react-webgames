@@ -1,17 +1,16 @@
 const path = require('path');
 
 module.exports = {
-  name: 'wordrelay-setting',
+  name: 'GuGuDan',
   mode: 'development',
   devtool: 'eval',
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.jsx', '.js'],
   },
 
   entry: {
     app: ['./client'],
-  }, //입력
-
+  },
   module: {
     rules: [
       {
@@ -23,9 +22,8 @@ module.exports = {
       },
     ],
   },
-
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'app.js',
-  }, //출력
+  },
 };
