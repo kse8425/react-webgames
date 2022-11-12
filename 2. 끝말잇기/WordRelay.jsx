@@ -37,18 +37,4 @@ const WordRelay = () => {
   );
 };
 
-class WordRelay1 extends React.Component {
-  state = {
-    word: '김성은',
-    value: '',
-    result: '',
-  };
-
-  input;
-
-  onRefInput = (c) => {
-    this.input = c;
-  };
-  render() {}
-}
 module.exports = WordRelay;
