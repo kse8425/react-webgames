@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import useInterval from './useInterval';
 const rspCoords = {
   바위: '0',
   가위: '-142px',
@@ -20,14 +21,7 @@ const RSP = () => {
   const [result, setResult] = useState('');
   const [score, setScore] = useState(scores.바위);
   const [imgCoord, setImgCoord] = useState(rspCoords.바위);
-  const interval = useRef();
-
-  useEffect(() => {
-    interval.current = setInterval(changeHand, 100);
-    return () => {
-      clearInterval(interval.current);
-    };
-  }, [imgCoord]);
+  const [isRunning, setIsRunning] = useState(true);
 
   const changeHand = () => {
     if (imgCoord === rspCoords.바위) {
@@ -39,23 +33,28 @@ const RSP = () => {
     }
   };
 
+  useInterval(changeHand, isRunning ? 100 : null);
+
   const onClickBtn = (choice) => {
-    clearInterval(interval.current);
-    const myScore = scores[choice];
-    const comScore = scores[computerChoice(imgCoord)];
-    const diff = myScore - comScore;
-    if (diff === 0) {
-      setResult('비겼습니다.');
-    } else if ([-1, 2].includes(diff)) {
-      setResult('이겼습니다.');
-      setScore((prevScore) => prevScore + 1);
-    } else {
-      setResult('졌습니다.');
-      setScore((prevScore) => prevScore - 1);
+    if (isRunning) {
+      setIsRunning(false);
+      const myScore = scores[choice];
+      const comScore = scores[computerChoice(imgCoord)];
+      const diff = myScore - comScore;
+      if (diff === 0) {
+        setResult('비겼습니다.');
+      } else if ([-1, 2].includes(diff)) {
+        setResult('이겼습니다.');
+        setScore((prevScore) => prevScore + 1);
+      } else {
+        setResult('졌습니다.');
+        setScore((prevScore) => prevScore - 1);
+      }
+
+      setTimeout(() => {
+        setIsRunning(true);
+      }, 2000);
     }
-    setTimeout(() => {
-      interval.current = setInterval(changeHand, 100);
-    }, 2000);
   };
   return (
     <>
